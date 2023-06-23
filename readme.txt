@@ -20,3 +20,6 @@ ON SCHEDULE EVERY 4 MINUTE
 DO
   DELETE FROM pesanan
   WHERE waktu < DATE_ADD(NOW(), INTERVAL -5 MINUTE) AND bukti_pembayaran IS NULL; 
+-----------------------------------------------------------------------------------
+note :
+Change the file name from "#.htaccess" to ".htaccess"
