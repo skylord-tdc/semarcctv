@@ -1,6 +1,6 @@
 #Account.
 username : admin@semarcctv.test
-password : root-0
+password : admin99
 ---------------------------------
 ##Mandatory Step##
 ------------------
