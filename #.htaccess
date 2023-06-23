@@ -1,0 +1,79 @@
+
+<IfModule mod_rewrite.c>
+RewriteEngine on
+
+
+# memblock akses directory
+Options -Indexes
+
+# menonaktifkan pencarian file htaccess
+<Files ~"^.*\.([Hh][Tt][Aa])">
+    order allow,deny
+    deny from all
+    satisfy all
+</Files>
+
+# DirectoryIndex home.php
+
+# hide extension php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.
+
+# link auth
+RewriteRule ^login?$ masuk/log-in.php
+RewriteRule ^register?$ daftar/register-user.php
+RewriteRule ^log-out?$ keluar/log-out-admin.php
+RewriteRule ^logout?$ keluar/log-out-buyer.php
+
+# link sistem
+RewriteRule ^dashboard?$ sistem/dashboard.php
+
+# link fungsi sistem
+RewriteRule ^update-acc?$ sistem/api_sistem/konfirmasi_pembelian.php
+RewriteRule ^confir?$ sistem/api_sistem/konfir.php
+RewriteRule ^invoice?$ sistem/api_sistem/nota.php
+RewriteRule ^redirect-orders-details?$ sistem/api_sistem/redirect-order-details.php
+RewriteRule ^add-product?$ sistem/api_sistem/add-product.php
+RewriteRule ^delete-product?$ sistem/api_sistem/delete-product.php
+RewriteRule ^delete-account?$ sistem/api_sistem/delete-account.php
+RewriteRule ^unduh-bulan-ini?$ sistem/api_sistem/data-bulan-ini.php
+RewriteRule ^unduh-tahun-ini?$ sistem/api_sistem/data-per-tahun.php
+
+# link website toko online
+RewriteRule ^beranda?$ index.php
+
+RewriteRule ^kategori-cctv-indoor?$ toko_online/kategori1.php
+RewriteRule ^kategori-cctv-indoor-filter?$ toko_online/kategori1-filter.php
+
+RewriteRule ^kategori-cctv-outdoor?$ toko_online/kategori2.php
+RewriteRule ^kategori-cctv-outdoor-filter?$ toko_online/kategori2-filter.php
+
+RewriteRule ^kategori-accessories?$ toko_online/kategori3.php
+RewriteRule ^kategori-accessories-filter?$ toko_online/kategori3-filter.php
+
+RewriteRule ^belanja?$ toko_online/shop.php 
+RewriteRule ^belanja-filter?$ toko_online/shop-filter.php 
+
+RewriteRule ^keranjang-belanja?$ toko_online/cart.php
+RewriteRule ^konfirmasi-pesanan?$ toko_online/checkout.php
+
+RewriteRule ^HelpContactUs?$ toko_online/help_contact_us.php
+RewriteRule ^ReturnsRefunds?$ toko_online/returns_refunds.php
+RewriteRule ^AvailableServices?$ toko_online/available_services.php
+
+# link fungsi toko online
+RewriteRule ^new-account?$ daftar/api_daftar/daftar-akun-baru.php
+RewriteRule ^add-cart?$ toko_online/api_website/add_cart.php
+RewriteRule ^add-cart-detail?$ toko_online/api_website/add_cart_detail.php
+RewriteRule ^add-cart-terkait?$ toko_online/api_website/add_cart_terkait.php
+RewriteRule ^update-cart?$ toko_online/api_website/update_keranjang.php
+RewriteRule ^pickup?$ toko_online/api_website/add_pickup.php
+RewriteRule ^shipping?$ toko_online/api_website/add_shipping.php
+RewriteRule ^proof-of-payment?$ toko_online/api_website/upload_bukti_pembayaran.php
+RewriteRule ^hapus-cart/([a-zA-Z0-9-_()/]+)/([a-zA-Z0-9-_()/]+)$ toko_online/api_website/hapus_keranjang.php?user_id=$1&produk_id=$2 [L]
+
+# link website toko online
+RewriteRule ^([a-zA-Z0-9-_()/]+)$ toko_online/detail.php?slug=$1 [L] 
+
+</IfModule>
