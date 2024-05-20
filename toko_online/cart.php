@@ -296,7 +296,7 @@ include 'api_website/func_rupiah.php';
                   <div id="history-belanja" class="collapse">
 
                     <div class="mt-3 alert alert-warning">
-                      <strong>Peringatan!</strong> Pesanan yang sudah dibuat dan belum memberi tanda bukti pembayaran akan secara otomatis di hapus. Segera melakukan pembayaran sebelum 1 hari setelah melakukan pemesanan.
+                      <strong>Peringatan!</strong> Pesanan yang sudah dibuat dan belum memberi tanda bukti pembayaran akan secara otomatis di hapus. Segera melakukan pembayaran sebelum 2 menit setelah melakukan pemesanan.
                     </div>
 
                     <?php
@@ -321,6 +321,13 @@ include 'api_website/func_rupiah.php';
                         echo '<p class="mb-0">Tanggal &nbsp:&nbsp' . $d['tanggal_pemesanan'] . ' </p>';
                         echo '<p class="mb-0">Barang &nbsp&nbsp:&nbsp' . $d['tipe_layanan'] . ' </p>';
                         echo '<p class="mb-0">Alamat &nbsp&nbsp:&nbsp' . $d['alamat_tujuan'] . ' </p>';
+                        if ($d['bank'] == 'BCA') {
+                          echo '<p class="mb-0">No.Rek &nbsp&nbsp:&nbsp 8030864141 </p>';
+                        } elseif ($d['bank'] == 'BRI') {
+                          echo '<p class="mb-0">No.Rek &nbsp&nbsp:&nbsp 182601003250504 </p>';
+                        } elseif ($d['bank'] == 'Mandiri') {
+                          echo '<p class="mb-0">No.Rek &nbsp&nbsp:&nbsp 1080015314645 </p>';
+                        }
 
                         $sql1 = mysqli_query($conn, "SELECT bukti_pembayaran FROM pesanan where id='$d[id]' ");
                         $row = mysqli_fetch_array($sql1);
